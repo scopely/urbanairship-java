@@ -19,7 +19,8 @@ public interface Tags {
     String create(@Path("name") String tagName);
 
     @POST("/tags/{name}")
-    String updateMembership(@Path("name") String tagName, @Body TagUpdateRequest request);
+    String updateMembership(@Path("name") String tagName,
+                            @Body TagUpdateRequest request);
 
     @DELETE("/tags/{name}")
     String delete(@Path("name") String tagName);
