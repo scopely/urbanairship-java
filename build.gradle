@@ -1,4 +1,30 @@
+buildscript {
+    //noinspection GroovyAssignabilityCheck
+    repositories {
+        mavenCentral()
+        maven {
+            url System.env.REPO_URL
+            credentials {
+                username System.env.REPO_USER
+                password System.env.REPO_PASS
+            }
+        }
+    }
+    //noinspection GroovyAssignabilityCheck
+    dependencies {
+        classpath 'com.google.guava:guava:17.0'
+        classpath 'com.scopely:scopely-publish-plugin:1.9'
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'scopely-publishing'
+
+scopely {
+    publishing {
+        artifactId 'urbanairship-java'
+    }
+}
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
