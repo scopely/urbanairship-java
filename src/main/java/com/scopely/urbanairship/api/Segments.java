@@ -2,6 +2,7 @@ package com.scopely.urbanairship.api;
 
 import com.scopely.urbanairship.model.Segment;
 import com.scopely.urbanairship.model.SegmentListResponse;
+import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
@@ -21,13 +22,12 @@ public interface Segments {
     Segment get(@Path("id") String segmentId);
 
     @POST("/segments")
-    String create(@Body Segment segment);
-    // TODO: Location header contains new ID
+    Response create(@Body Segment segment);
 
     @PUT("/segments/{id}")
-    String update(@Path("id") String segmentId,
+    Response update(@Path("id") String segmentId,
                   @Body Segment segment);
 
     @DELETE("/segments/{id}")
-    String delete(@Path("id") String segmentId);
+    Response delete(@Path("id") String segmentId);
 }

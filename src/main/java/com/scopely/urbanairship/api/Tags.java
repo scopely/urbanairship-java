@@ -4,6 +4,7 @@ import com.scopely.urbanairship.model.TagBatchRequest;
 import com.scopely.urbanairship.model.TagBatchResponse;
 import com.scopely.urbanairship.model.TagListResponse;
 import com.scopely.urbanairship.model.TagUpdateRequest;
+import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
@@ -16,14 +17,14 @@ public interface Tags {
     TagListResponse getAll();
 
     @PUT("/tags/{name}")
-    String create(@Path("name") String tagName);
+    Response create(@Path("name") String tagName);
 
     @POST("/tags/{name}")
-    String updateMembership(@Path("name") String tagName,
-                            @Body TagUpdateRequest request);
+    Response updateMembership(@Path("name") String tagName,
+                              @Body TagUpdateRequest request);
 
     @DELETE("/tags/{name}")
-    String delete(@Path("name") String tagName);
+    Response delete(@Path("name") String tagName);
 
     @POST("/tags/batch/")
     TagBatchResponse batchUpdate(@Body TagBatchRequest request);
