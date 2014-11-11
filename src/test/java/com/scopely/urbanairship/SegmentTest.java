@@ -6,6 +6,10 @@ import com.scopely.urbanairship.model.SegmentListResponse;
 import org.junit.Before;
 import org.junit.Test;
 import retrofit.RestAdapter;
+import retrofit.client.Header;
+import retrofit.client.Response;
+
+import java.util.Optional;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -45,5 +49,26 @@ public class SegmentTest {
 
         listResponse = segments.getAll();
         assertThat(listResponse.getSegments().size()).isEqualTo(originalSize - 1);
+    }
+
+    @Test
+    public void creation() {
+        Segment request = new Segment("Creation test", new Segment.TagCriteria("my_tag"));
+
+        // create and scrape id
+        Response resp = segments.create(request);
+        Optional<Header> header = resp.getHeaders().stream().skip(1).filter(h -> h.getName().equals("Location")).findFirst();
+        assertThat(header.isPresent()).isTrue();
+        String location = header.get().getValue();
+        String id = location.substring(location.lastIndexOf('/') + 1);
+        assertThat(id).contains("-");
+        assertThat(id.length()).isGreaterThan(20);
+
+        // check that it exists
+        Segment seg = segments.get(id);
+        assertThat(seg.getDisplayName()).isEqualTo(request.getDisplayName());
+
+        // cleanup
+        segments.delete(id);
     }
 }
