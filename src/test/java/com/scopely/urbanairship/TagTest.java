@@ -28,7 +28,7 @@ public class TagTest {
     }
 
     @Test
-    public void getAllTags() {
+    public void tagLifecycle() {
         List<String> allTags = tags.getAll().getTags();
         assertThat(allTags.size()).isGreaterThan(0);
 

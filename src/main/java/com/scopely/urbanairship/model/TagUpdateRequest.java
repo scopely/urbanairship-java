@@ -1,8 +1,8 @@
 package com.scopely.urbanairship.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TagUpdateRequest extends HashMap<ChannelType, TagUpdateRequest.ChannelUpdateObject> {
     public ChannelUpdateObject getChannelObject(ChannelType type) {
@@ -25,12 +25,12 @@ public class TagUpdateRequest extends HashMap<ChannelType, TagUpdateRequest.Chan
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     protected class ChannelUpdateObject {
-        private final List<String> add;
-        private final List<String> remove;
+        private final Set<String> add;
+        private final Set<String> remove;
 
         public ChannelUpdateObject() {
-            add = new ArrayList<>();
-            remove = new ArrayList<>();
+            add = new HashSet<>();
+            remove = new HashSet<>();
         }
 
         public void addMember(String channelId) {
